@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="weatherApp">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Weather App</title>
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/AngularJS-Toaster/toaster.css" />
+    <!-- endbower -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="/app/styles/styles.css">
+    <!-- endinject -->
+</head>
+
+<body ng-controller="MainController as vm">
+    <div class="container">
+        <div class="jumbotron">
+            <h1>Orgin Weather Application</h1>
+            <p>Always know if you'll an umbrella!</p>
+        </div>
+        <br>
+        <div class="btn-group">
+            <button type="button" ng-click="vm.getW ('San Diego')" class="btn btn-primary">San Diego</button>
+            <button type="button" ng-click="vm.getW ('New York')" class="btn btn-primary">New York</button>
+            <button type="button" ng-click="vm.getW ('Washington D.C')" class="btn btn-primary">Washington D.C</button>
+            <button type="button" ng-click="vm.getW ('London')" class="btn btn-primary">London</button>
+            <button type="button" ng-click="vm.getW ('Tokyo')" class="btn btn-primary">Tokyo</button>
+        </div>
+        <div class="input-group">
+            <input type="text" class="form-control" ng-model="vm.citysearch" placeholder="City">
+            <span class="input-group-btn">
+       <button class="btn btn-primary" ng-click="vm.getW(vm.citysearch)" type="button">Go!</button>
+  </span>
+        </div>
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="panel panel-info">
+                    <div class="panel-heading">City Information</div>
+                    <div class="panel-body">
+                        <table id="t1" style="float: left;">
+                            <tr>
+                                <td></td>
+                                <td class="col-md-6">
+                                    <img ng-src="http://openweathermap.org/img/w/{{vm.weatherInfo.weather[0].icon}}.png"><span class="head">{{vm.weatherInfo.name}}</span></img>
+                                    <p>Lat/Long: {{vm.weatherInfo.coord.lat}}, {{vm.weatherInfo.coord.lon}}</p>
+                                </td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <p>Temperature (F)</p>
+                                    <p>{{vm.weatherInfo.main.temp}}</p>
+                                </td>
+                                <td class="col-md-4">
+                                    <p>Pressure</p>
+                                    <p>{{vm.weatherInfo.main.pressure}}</p>
+                                </td>
+                                <td class="col-md-4">
+                                    <p>Humidity</p>
+                                    <p>{{vm.weatherInfo.main.humidity}}</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <p>Lowest Temp (F)</p>
+                                    <p>{{vm.weatherInfo.main.temp_min}}</p>
+                                </td>
+                                <td class="col-md-4">
+                                    <p>Highest Temp (F)</p>
+                                    <p>{{vm.weatherInfo.main.temp_max}}</p>
+                                </td>
+                                <td class="col-md-4">
+                                    <p>Wind Speed</p>
+                                    <p>{{vm.weatherInfo.wind.speed}}</p>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="panel panel-info">
+                    <div class="panel-heading">Search History</div>
+                    <div class="panel-body">
+                        <table id="t2" class="table table-striped" style="float: left;">
+                            <tr ng-repeat="record in vm.search">
+                                <td class="col-md-7">{{record.name}}</td>
+                                <td class="col-md-7">{{record.time}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<!-- bower:js -->
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="bower_components/angular-animate/angular-animate.js"></script>
+<script src="bower_components/AngularJS-Toaster/toaster.js"></script>
+<!-- endbower -->
+<!-- inject:js -->
+<script src="/app/app.js"></script>
+<script src="/app/main.controller.js"></script>
+<script src="/app/main.factory.js"></script>
+<!-- endinject -->
+</body>
+
+</html>
